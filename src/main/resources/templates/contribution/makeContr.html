@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{styles/main.css}" rel="stylesheet"/>
+    <link rel="shortcut icon" th:href="@{/fav.ico}">
+
+</head>
+<body class="d-flex flex-column h-100">
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<form class = "forma" th:action="@{/contribution/makeContribution}" method="post">
+    <label for="sum">Введите сумму вклада</label>
+    <input type="number" name="sum" id = "sum" max=999999999 min = 10000 required>
+    <br />
+    <label for="term">Выберите валюту:</label>
+    <select id="term" name="term">
+        <option value="1">1 мес.</option>
+        <option value="2">2 мес.</option>
+        <option value="3">3 мес.</option>
+        <option value="4">4 мес.</option>
+        <option value="5">5 мес.</option>
+        <option value="6">6 мес.</option>
+        <option value="9">9 мес.</option>
+        <option value="12">12 мес.</option>
+    </select>
+    <input type="submit" value = "Расчитать вклад">
+</form>
+<div  th:replace="~{fragments/footer :: footer}"> </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
+</script>
+</body>

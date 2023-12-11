@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{styles/main.css}" rel="stylesheet"/>
+    <link rel="shortcut icon" th:href="@{/fav.ico}">
+
+</head>
+<body class="d-flex flex-column h-100">
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<form class = "forma" th:action="@{/cards/makeCreditCard}" method="post">
+    <label for="currencies">Выберите валюту:</label>
+    <select id="currencies" name="currency">
+        <option value="RUB">Рубли</option>
+        <option value="USD">Доллары</option>
+        <option value="EUR">Евро</option>
+    </select>
+    <br />
+    <label for="limit">Введите максимальную сумму</label>
+    <input type="number" name="limit" id = "limit" max=50000 min = 10000 required>
+    <label for="salary">Введите вашу заработную плату</label>
+    <input type="number" id = "salary" name="salary" required>
+    <p>Ваша страна проживания: Россия</p>
+    <input type="submit" value = "Далее">
+</form>
+<div  th:replace="~{fragments/footer :: footer}"> </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
+</script>
+</body>

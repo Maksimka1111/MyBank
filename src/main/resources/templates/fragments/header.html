@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring MVC</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="header">
+
+    <a class="navbar-brand" th:href="@{/}">Главная</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+            aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" th:class="${activePage == 'profile'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/profile}">Личный кабинет</a>
+            </li>
+            <li class="nav-item" th:class="${activePage == 'subjects'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/credit/credits}">Кредиты</a>
+            </li>
+            <li class="nav-item" th:class="${activePage == 'subjects'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/contribution/contributions}">Вклады</a>
+            </li>
+            <li class="nav-item" th:class="${activePage == 'info'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/info}">О нас</a>
+            </li>
+        </ul>
+        <div class = "auth">
+            <th:block>
+                <p th:if="${#authentication.getName() == 'anonymousUser'}"> <a class="nav-link" th:href="@{/loginM}">Войти/Зарегестрироваться</a></p>
+                <p th:if="${#authentication.getName() != 'anonymousUser'}" th:text="${#authentication.getName()}"></p>
+                <a th:if="${#authentication.getName() != 'anonymousUser'}" th:href = "@{/logout}">|Выйти</a>
+            </th:block>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

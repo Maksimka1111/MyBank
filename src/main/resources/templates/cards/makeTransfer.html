@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{styles/main.css}" rel="stylesheet"/>
+    <link rel="shortcut icon" th:href="@{/fav.ico}">
+
+</head>
+<body class="d-flex flex-column h-100">
+
+<div th:replace="~{fragments/header :: header}"></div>
+<p th:text="${errorMessage}"></p>
+<form class = "forma" th:action="@{/cards/makeTransfer}" method="post">
+    <label for="transfer">Укажите сумму</label>
+    <input type="text" min = 0.01 max = 10000000 name="money" id = 'transfer' required><br />
+    <label for="cardTransfer">Введите номер карты для перевода</label>
+    <input type="text" name="cardTransfer" id = 'cardTransfer' required> <br />
+    <label for="confirm">Подветрдить перевод</label>
+    <input type="checkbox" id = 'confirm' required>
+    <input type="hidden" name="yourCardNumber" th:value="${yourCardNumber}">
+    <input type="submit" value = "Подтвердить">
+</form>
+<div  th:replace="~{fragments/footer :: footer}"> </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
+</script>
+</body>

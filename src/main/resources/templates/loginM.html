@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{styles/main.css}" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{/fav.ico}">
+
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/header :: header}"> </div>
+<p th:text="${userError}"></p>
+<form  th:action="@{/loginM}" method="post" class = "forma">
+    <h2>Вход</h2>
+    <div>
+        <input type="text" name="username" placeholder="Username">
+    </div>
+    <div>
+        <input type="password" name="password" placeholder="Password">
+    </div>
+    <input type="submit" value = "Войти">
+    <p>Еще не зарегестрированы? <a th:href="@{/registration}">Регистрация</a></p>
+</form>
+
+<div  th:replace="~{fragments/footer :: footer}"> </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
+</script>
+</body>
+</html>

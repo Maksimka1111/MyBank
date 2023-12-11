@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{styles/main.css}" rel="stylesheet"/>
+    <link rel="shortcut icon" th:href="@{/fav.ico}">
+
+</head>
+<body class="d-flex flex-column h-100">
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class = "person">
+    <div class = "courseDiv">
+        <p>Имя пользователя: </p><p th:text ="${#authentication.getName()}"></p>
+    </div>
+    <p>Ваши карты</p>
+</div>
+<div class = "cardBlock">
+    <div th:if="not ${CredCards.isEmpty()} or not ${DebCards.isEmpty()}">
+    <th:block th:each="card: ${DebCards}">
+        <div class = "courseStyle">
+            <div class = "courseDiv">
+                 <p th:text="${card.getNumber()} ">
+                 </p>
+                <p th:text="${card.getMoney()} ">
+                </p>
+                <p th:text="${card.getDate()} ">
+                </p>
+                <p th:text="${card.getOwnerName()} ">
+                </p>
+                <p th:text="${card.getSecretCode()} ">
+                </p>
+                <p th:if="${card.isBlocked()}"> ">
+                    Заблокирована
+                </p>
+            </div>
+            <form th:action="@{/cards/makeTransfer}" method="get">
+                <input type = "hidden" th:value="${card.getNumber()}"  name="cardNumber">
+                <input type="submit" value="Совершить перевод">
+            </form>
+            </form>
+            <form th:action="@{/cards/blockCard}" method="post">
+                <input type = "hidden" th:value="${card.getNumber()}"  name="cardNumber">
+                <input type="submit" value="Заблокировать">
+            </form>
+            <form th:action="@{/cards/delCard}" method="post">
+                <input type = "hidden" th:value="${card.getNumber()}"  name="cardNumber">
+                <input type="submit"  value="Удалить">
+            </form>
+        </div>
+    </th:block>
+    <th:block th:each="card: ${CredCards}">
+        <div class = "courseStyle">
+            <div class = "courseStyle">
+                <div class = "courseDiv">
+                    <p th:text="${card.getNumber()}">
+                    </p>
+                    <p th:text="${card.getDuty()}">
+                    </p>
+                    <p th:text="${card.getDate()}">
+                    </p>
+                    <p th:text="${card.getOwnerName()}">
+                    </p>
+                    <p th:text="${card.getSecretCode()}">
+                    </p>
+                    <p th:if="${card.isBlocked()}">">
+                        Заблокирована
+                    </p>
+                </div>
+            </div>
+            <form th:action="@{/cards/blockCard}" method="post">
+                <input type = "hidden" th:value="${card.getNumber()}"  name="cardNumber">
+                <input type="submit" value="Заблокировать">
+            </form>
+            <form th:action="@{/cards/delCard}" method="post">
+                <input type = "hidden" th:value="${card.getNumber()}"  name="cardNumber">
+                <input type="submit"  value="Удалить">
+            </form>
+            </div>
+        </div>
+    </th:block>
+    </div>
+    <div th:if="${CredCards.isEmpty()} and ${DebCards.isEmpty()}">
+        <p>У вас еще нет карт</p>
+    </div>
+    <a th:href="@{/cards/makeDebitCard}">Завести дебетовую карту</a>
+    <br />
+    <a th:href="@{/cards/makeCreditCard}">Завести кредитную карту</a>
+    <div th:if="not ${Credits.isEmpty()}">
+        <th:block th:each="credit: ${Credits}">
+            <div class = "courseStyle">
+                <div class = "courseDiv">
+                    <p th:text="'Номер счета: '${credit.getNumber()}">
+                    </p>
+                    <p th:text="'Месячная плата: '${credit.getMonthPayment()}+ ' руб.'">
+                    </p>
+                    <p th:text="'Срок:' + ${credit.getTerm()} + ' мес.'">
+                    </p>
+                    <p th:text="'Под '${credit.getPercent()} + '%'">
+                    </p>
+                    <p th:text="'Остаток долга: '${credit.getSum()}">
+                    </p>
+                </div>
+            </div>
+        </th:block>
+    </div>
+    <div th:if="not ${Contrs.isEmpty()}">
+        <th:block th:each="contr: ${Contrs}">
+            <div class = "courseStyle">
+                <div class = "courseDiv">
+                    <p th:text="'Номер счета: '${contr.getNumber()}">
+                    </p>
+                    <p th:text="'Итоговая выгода: '${contr.getProfit()} + ' руб.'">
+                    </p>
+                    <p th:text="'Срок:' + ${contr.getTerm()} + ' мес.'">
+                    </p>
+                    <p th:text="'Доходность: '${contr.getPercent()} + '%'">
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
+</script>
+</body>
+</html>
